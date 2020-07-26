@@ -1,0 +1,298 @@
+﻿@using GorevYoneticisi.Controllers
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index Sayfasi";
+}
+
+<script src="~/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxlistbox.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxdate.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxcalendar.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxdatetimeinput.js"></script>
+<script src="~/jqwidgets/jqwidgets/globalization/globalize.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxlistbox.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxwindow.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxpasswordinput.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxinput.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxradiobutton.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxscheduler.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxscheduler.api.js"></script>
+<script src="~/jqwidgets/jqwidgets/jqxnumberinput.js"></script>
+
+
+
+
+    <div class="row no-gutters pt-5">
+        
+        <div class="col-8 text-center">
+            <div id="scheduler" class="mx-auto">
+
+            </div>
+        </div>
+        <div class="col-4 text-center">
+            <div class="mx-auto">
+                <p class="pt-5">Olaylar</p>
+                <hr />
+                <p id="logger"></p>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    var source =
+    {
+        dataType: "json",
+        dataFields: [
+            { name: 'id', type: 'string' },
+            { name: 'aciklama', type: 'string' },
+            { name: 'baslik', type: 'string' },
+            { name: 'baslangicTarihi', type: 'date' },
+            { name: 'bitisTarihi', type: 'date' }
+        ],
+        id: 'id',
+        url: 'Home/GetData'
+    };
+        var adapter = new $.jqx.dataAdapter(source);
+
+        $("#scheduler").jqxScheduler({
+            date: new $.jqx.date(2015, 11, 23),
+            width: 850,
+            height: 600,
+            columns: [
+                //dd - MMM - yyyy hh: mm: ss: aa
+                { text: 'date', datafield: 'date', cellsformat: 'yyyy.dd.MM.mm.ss' }],
+        editDialogCreate: function (dialog, fields, editAppointment) {
+            // hide repeat option
+            fields.repeatContainer.hide();
+            // hide status option
+            fields.statusContainer.hide();
+            // hide timeZone option
+            fields.timeZoneContainer.hide();
+            // hide color option
+            fields.colorContainer.hide();
+            fields.location.hide();
+            fields.allDay.hide();
+            fields.repeatContainer.hide();
+            fields.repeat.hide();
+
+            fields.repeatLabel.html("");
+            fields.locationLabel.html("");
+            fields.subjectLabel.html("Baslik");
+            fields.fromLabel.html("Baslangic");
+            fields.allDayLabel.html("");
+            fields.toLabel.html("Bitis");
+            fields.resourceLabel.html("Calendar");
+        },
+        source: adapter,
+        localization: {
+            // separator of parts of a date (e.g. '/' in 11/05/1955)
+            '/': "/",
+            // separator of parts of a time (e.g. ':' in 05:44 PM)
+            ':': ":",
+            // the first day of the week (0 = Sunday, 1 = Monday, etc)
+            firstDay: 1,
+            days: {
+                // full day names
+                names: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"],
+                // abbreviated day names
+                namesAbbr: ["Paz", "Pts", "Sal", "Çar", "Per", "Cum", "Cts"],
+                // shortest day names
+                namesShort: ["Pz", "Pt", "Sa", "Ça", "Pe", "Cu", "Ct"]
+            },
+
+            months: {
+                names: ["Ocak", "Şubat", "Mart", "Nisan", "Mayis", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık", ""],
+                namesAbbr: ["Ock", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Agu", "Eyl", "Ekm", "Kas", "Ara", ""]
+            },
+            AM: null,
+            PM: null,
+            eras: [
+                { "name": "A.D.", "start": null, "offset": 0 }
+            ],
+            twoDigitYearMax: 2029,
+            patterns: {
+                // short date pattern
+                d: "M/d/yyyy",
+                // long date pattern
+                D: "dddd, MMMM dd, yyyy",
+                // short time pattern
+                t: "h:mm tt",
+                // long time pattern
+                T: "h:mm:ss tt",
+                // long date, short time pattern
+                f: "dddd, MMMM dd, yyyy h:mm tt",
+                // long date, long time pattern
+                F: "dddd, MMMM dd, yyyy h:mm:ss tt",
+                // month/day pattern
+                M: "MMMM dd",
+                // month/year pattern
+                Y: "yyyy MMMM",
+                // S is a sortable format that does not vary by culture
+                S: "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss",
+                // formatting of dates in MySQL DataBases
+                ISO: "yyyy-MM-dd hh:mm:ss",
+                ISO2: "yyyy-MM-dd HH:mm:ss",
+                d1: "dd.MM.yyyy",
+                d2: "dd-MM-yyyy",
+                d3: "dd-MMMM-yyyy",
+                d4: "dd-MM-yy",
+                d5: "H:mm",
+                d6: "HH:mm",
+                d7: "HH:mm tt",
+                d8: "dd/MMMM/yyyy",
+                d9: "MMMM-dd",
+                d10: "MM-dd",
+                d11: "MM-dd-yyyy"
+            },
+
+        },
+        ready: function () {
+            $("#scheduler").jqxScheduler('ensureAppointmentVisible', 'id1');
+        },
+        resources:
+        {
+            colorScheme: "scheme05",
+            dataField: "calendar",
+            source: new $.jqx.dataAdapter(source)
+        },
+        appointmentDataFields:
+        {
+            //from: "start",
+            //to: "end",
+            //id: "id",
+            //description: "description",
+            ////location: "place",
+            //subject: "subject",
+            //resourceId: "calendar"
+            from: "baslangicTarihi",
+            to: "bitisTarihi",
+            id: "id",
+            description: "aciklama",
+            //location: "place",
+            subject: "baslik",
+            resourceId: "calendar"
+
+        },
+        view: 'weekView',
+        views:
+            [
+                { type: 'dayView', timeRuler: { formatString: 'HH:mm' } },
+                { type: 'weekView', timeRuler: { formatString: 'HH:mm' } },
+                'monthView'
+            ]
+        });
+
+        var idValClass = function (id) {
+            this.id = id;
+        }
+
+
+        function ajaxFunction(mUrl, mData) {
+            var myJSON = JSON.stringify(mData);
+            var idVal = '';
+            
+            $.ajax({
+
+                type: 'POST',
+
+                url: mUrl,
+
+                data: myJSON,
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("RequestVerificationToken",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                contentType: "application/json",
+
+                dataType: 'text',
+
+                success: function (data) {
+                    var obj = jQuery.parseJSON(data);
+                    if (obj.success) {
+                        var txt = $("#logger").html();
+                        
+                        $("#logger").html((txt) + '<br />' + obj.responseText);
+                        if (typeof obj['idvalue'] != 'undefined') {
+
+                            idVal = new idValClass(obj.idvalue);
+                        }
+                    } else {
+                        var txt = $("#logger").html();
+                       
+                        $("#logger").html((txt) + '<br />' + obj.responseText);
+                    }         
+                    
+                },
+                error: function (data) {
+                    var txt = $("#logger").html();
+                    $("#logger").html((txt) + '<br />' +" hata : "+ data + "--");
+                }
+
+            });
+            return idVal;
+        }
+
+        function appointmentToObject(appointment) {
+            var mObj = new Object();
+            mObj.aciklama = appointment.description;
+            mObj.baslik = appointment.subject;
+            mObj.baslangicTarihi = new $.jqx.date(appointment.from).toDate();
+            mObj.bitisTarihi = new $.jqx.date(appointment.to).toDate();
+            
+            return mObj;
+        }
+
+
+        $("#scheduler").on('appointmentChange', function (event) {
+            //get appointment
+            var args = event.args;
+            var appointment = args.appointment;
+            var mob = appointmentToObject(appointment);
+            mob.id = appointment.id;
+
+            ajaxFunction("/Home/UpdateData", mob);
+            
+        }); 
+        $("#scheduler").on('appointmentDelete', function (event) {
+            var args = event.args;
+            var appointment = args.appointment;
+            var mob = appointmentToObject(appointment);
+            mob.id = appointment.id;
+            ajaxFunction("/Home/DeleteData", mob);
+        });
+        $("#scheduler").on('appointmentAdd', function (event) {
+            var args = event.args;
+            var appointment = args.appointment;
+            var mob = appointmentToObject(appointment);
+            var idVal = ajaxFunction("/Home/AddData", mob);
+            console.log(idVal.id);
+            appointment.id = idVal.id;
+            console.log(appointment.id);
+            
+            
+        });
+        
+      
+
+
+});
+
+
+
+</script>
