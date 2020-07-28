@@ -18,11 +18,10 @@ namespace GorevYoneticisi.Models
         public DbSet<T> Table { get; set; }
 
 
-        public T Add(T entity)
+        public bool Add(T entity)
         {
             Table.Add(entity);
-            Save();
-            return entity;
+            return Save();
         }
 
         public bool Update(T entity)

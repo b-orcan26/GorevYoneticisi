@@ -9,7 +9,7 @@ namespace GorevYoneticisi.Models
     public class Plan
     {
         [Key]
-        public int id { get; set; }
+        public String id { get; set; }
         public String aciklama { get; set; }
         public String baslik { get; set; }
         public String baslangicTarihi { get; set; }

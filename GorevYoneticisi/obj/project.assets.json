@@ -8402,11 +8402,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Baris\\source\\repos\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi.csproj",
+      "projectUniqueName": "C:\\Users\\Baris\\Desktop\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi.csproj",
       "projectName": "GorevYoneticisi",
-      "projectPath": "C:\\Users\\Baris\\source\\repos\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi.csproj",
+      "projectPath": "C:\\Users\\Baris\\Desktop\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi.csproj",
       "packagesPath": "C:\\Users\\Baris\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Baris\\source\\repos\\GorevYoneticisi\\GorevYoneticisi\\obj\\",
+      "outputPath": "C:\\Users\\Baris\\Desktop\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

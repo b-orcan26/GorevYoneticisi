@@ -31,17 +31,16 @@ namespace GorevYoneticisi.Controllers
         [HttpPost]
         public JsonResult AddData([FromBody] Plan mPlan)
         {
-            Plan _plan = planRepository.Add(mPlan);
-            var id_value = _plan.id;
-            if (id_value != 0)
+            bool durum = planRepository.Add(mPlan);
+
+            if (durum)
             {
-                return Json(new { success = true, responseText = "Ekleme basarili" , idvalue = id_value });
+                return Json(new { success = true, responseText = "Ekleme basarili" });
             }
             else
             {
                 return Json(new { success = false, responseText = "Ekleme basarisiz" });
             }
-            
         }
 
         [HttpPost]

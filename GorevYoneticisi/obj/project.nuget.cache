@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sd1xyh92615hBLMKGbCMYj30xMrW2VBuIVpcncT08dtxVclsVwnCG6jVWKfzVYeKxNA1qaNUynp6Y8i2BPZ7nw==",
+  "dgSpecHash": "jl3+svu90z6PiNxaLU7MA/UXVTiRmOkFI3PjTZ3lWaM2dmU7OFbcv/Wwt/Q2pk3qLoq/JECxI+60t2VIpGcJfA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Baris\\source\\repos\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi.csproj",
+  "projectFilePath": "C:\\Users\\Baris\\Desktop\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi\\GorevYoneticisi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Baris\\.nuget\\packages\\linq2db\\3.0.1\\linq2db.3.0.1.nupkg.sha512",
     "C:\\Users\\Baris\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

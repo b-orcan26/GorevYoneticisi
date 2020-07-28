@@ -203,7 +203,6 @@
 
         function ajaxFunction(mUrl, mData) {
             var myJSON = JSON.stringify(mData);
-            var idVal = '';
             
             $.ajax({
 
@@ -228,10 +227,7 @@
                         var txt = $("#logger").html();
                         
                         $("#logger").html((txt) + '<br />' + obj.responseText);
-                        if (typeof obj['idvalue'] != 'undefined') {
-
-                            idVal = new idValClass(obj.idvalue);
-                        }
+ 
                     } else {
                         var txt = $("#logger").html();
                        
@@ -245,7 +241,6 @@
                 }
 
             });
-            return idVal;
         }
 
         function appointmentToObject(appointment) {
@@ -280,12 +275,8 @@
             var args = event.args;
             var appointment = args.appointment;
             var mob = appointmentToObject(appointment);
-            var idVal = ajaxFunction("/Home/AddData", mob);
-            console.log(idVal.id);
-            appointment.id = idVal.id;
-            console.log(appointment.id);
-            
-            
+            mob.id = appointment.id;
+            ajaxFunction("/Home/AddData", mob, false);
         });
         
       
