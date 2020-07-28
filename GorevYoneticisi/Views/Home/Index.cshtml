@@ -1,4 +1,4 @@
-﻿@using GorevYoneticisi.Controllers
+@using GorevYoneticisi.Controllers
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,7 +30,7 @@
 
 
 
-    <div class="row no-gutters pt-5">
+    <div class="row no-gutters pt-5" data-key="7">
         
         <div class="col-8 text-center">
             <div id="scheduler" class="mx-auto">
@@ -43,7 +43,7 @@
                 <hr />
                 <p id="logger"></p>
             </div>
-            
+            <button id="getAllId">Get All id</button>
         </div>
     </div>
 
@@ -67,6 +67,11 @@
         url: 'Home/GetData'
     };
         var adapter = new $.jqx.dataAdapter(source);
+        
+        $("#scheduler").on('bindingComplete', function (event) {
+            var args = event.args;
+            console.log("bindingComplete is raised");
+        });
 
         $("#scheduler").jqxScheduler({
             date: new $.jqx.date(2015, 11, 23),
@@ -196,12 +201,9 @@
             ]
         });
 
-        var idValClass = function (id) {
-            this.id = id;
-        }
 
 
-        function ajaxFunction(mUrl, mData) {
+        function ajaxFunction(mUrl, mData ,isAsync) {
             var myJSON = JSON.stringify(mData);
             
             $.ajax({
@@ -219,6 +221,8 @@
 
                 contentType: "application/json",
 
+                async: isAsync,
+
                 dataType: 'text',
 
                 success: function (data) {
@@ -227,7 +231,7 @@
                         var txt = $("#logger").html();
                         
                         $("#logger").html((txt) + '<br />' + obj.responseText);
- 
+
                     } else {
                         var txt = $("#logger").html();
                        
@@ -259,9 +263,11 @@
             var args = event.args;
             var appointment = args.appointment;
             var mob = appointmentToObject(appointment);
+            console.log("changing id :" + appointment.id);
             mob.id = appointment.id;
+            console.log("appo degisiyor id'si" + mob.id);
 
-            ajaxFunction("/Home/UpdateData", mob);
+            ajaxFunction("/Home/UpdateData", mob,true);
             
         }); 
         $("#scheduler").on('appointmentDelete', function (event) {
@@ -269,7 +275,7 @@
             var appointment = args.appointment;
             var mob = appointmentToObject(appointment);
             mob.id = appointment.id;
-            ajaxFunction("/Home/DeleteData", mob);
+            ajaxFunction("/Home/DeleteData", mob,true);
         });
         $("#scheduler").on('appointmentAdd', function (event) {
             var args = event.args;
@@ -279,7 +285,7 @@
             ajaxFunction("/Home/AddData", mob, false);
         });
         
-      
+        
 
 
 });
